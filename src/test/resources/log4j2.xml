@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="WARN">
+    <Properties>
+        <Property name="basePath">./logs</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+        <RollingFile name="File" fileName="${basePath}/automation.log"
+                     filePattern="${basePath}/automation-%d{yyyy-MM-dd-HH.mm.ss}.log">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <SizeBasedTriggeringPolicy size="50MB" />
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="debug"> <!-- Here, we can use All < Trace < Debug < Info < Warn < Error < Fatal Error < Off -->
+            <AppenderRef ref="File"/>
+        </Root>
+    </Loggers>
+</Configuration>
+
+<!-- 
+ALL: Logs everything.
+TRACE: Finer-grained informational events than DEBUG.
+DEBUG: Logs events useful to developers for debugging the application.
+INFO: Logs general informational messages (e.g., application startup, shutdown).
+WARN: Logs potentially harmful situations but allows the application to continue running.
+ERROR: Logs error events that might still allow the application to continue.
+FATAL: Logs very severe error events that might lead the application to abort.
+OFF: Turns off all logging.
+
+Examples:
+level="debug" will log DEBUG, INFO, WARN, ERROR, and FATAL messages.
+level="warn" will log WARN, ERROR, and FATAL messages.
+
+
+-->
